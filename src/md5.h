@@ -32,9 +32,9 @@
 /**
  * @Basic MD5 functions.
  *
- * @param there bit32.
+ * @param there uint32_t.
  *
- * @return one bit32.
+ * @return one uint32_t.
  */
 #define F(x, y, z) (((x) & (y)) | ((~x) & (z)))
 #define G(x, y, z) (((x) & (z)) | ((y) & (~z)))
@@ -78,21 +78,20 @@
 
 #include <string>
 #include <cstring>
+#include <stdint.h>
 
 using std::string;
-
-/* Define of btye.*/
-typedef unsigned char byte;
-/* Define of byte. */
-typedef unsigned int bit32;
 
 class MD5 {
 public:
   /* Construct a MD5 object with a string. */
   MD5(const string& message);
+	
+  /* Construct a MD5 object with a uchar araay. */
+  MD5(const uint8_t* data,const int length);
 
   /* Generate md5 digest. */
-  const byte* getDigest();
+  const uint8_t* getDigest();
 
   /* Convert digest to string value */
   string toStr();
@@ -100,35 +99,35 @@ public:
 private:
   /* Initialization the md5 object, processing another message block,
    * and updating the context.*/
-  void init(const byte* input, size_t len);
+  void init(const uint8_t* input, size_t len);
 
   /* MD5 basic transformation. Transforms state based on block. */
-  void transform(const byte block[64]);
+  void transform(const uint8_t block[64]);
 
-  /* Encodes input (usigned long) into output (byte). */
-  void encode(const bit32* input, byte* output, size_t length);
+  /* Encodes input (usigned long) into output (uint8_t). */
+  void encode(const uint32_t* input, uint8_t* output, size_t length);
 
-  /* Decodes input (byte) into output (usigned long). */
-  void decode(const byte* input, bit32* output, size_t length);
+  /* Decodes input (uint8_t) into output (usigned long). */
+  void decode(const uint8_t* input, uint32_t* output, size_t length);
 
 private:
   /* Flag for mark whether calculate finished. */
   bool finished;
 
 	/* state (ABCD). */
-  bit32 state[4];
+  uint32_t state[4];
 
   /* number of bits, low-order word first. */
-  bit32 count[2];
+  uint32_t count[2];
 
   /* input buffer. */
-  byte buffer[64];
+  uint8_t buffer[64];
 
   /* message digest. */
-  byte digest[16];
+  uint8_t digest[16];
 
 	/* padding for calculate. */
-  static const byte PADDING[64];
+  static const uint8_t PADDING[64];
 
   /* Hex numbers. */
   static const char HEX_NUMBERS[16];
