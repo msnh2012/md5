@@ -27,7 +27,7 @@ int main() {
   printMD5("abcdefghijklmnopqrstuvwxyz");
   printMD5("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 	
-  uint8_t data[] = {'0x51','0x52','0x53'};
+  uint8_t data[] = {'0x97','0x98','0x99'};
   const uint8_t* rev= MD5(data,sizeof(data)).getDigest();
   return 0;
 }
