@@ -26,5 +26,8 @@ int main() {
   printMD5("message digest");
   printMD5("abcdefghijklmnopqrstuvwxyz");
   printMD5("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-	return 0;
+	
+  uint8_t data[] = {'0x51','0x52','0x53'};
+  const uint8_t* rev= MD5(data,sizeof(data)).getDigest();
+  return 0;
 }
